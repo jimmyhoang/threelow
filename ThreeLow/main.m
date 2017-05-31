@@ -9,32 +9,31 @@
 #import <Foundation/Foundation.h>
 #import "Dice.h"
 #import "InputHandler.h"
+#import "GameController.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSLog(@"Welcome to Threelow!");
         InputHandler* input = [[InputHandler alloc] init];
-        Dice* dice = [[Dice alloc] init];
-        Dice* dice2 = [[Dice alloc] init];
-        Dice* dice3 = [[Dice alloc] init];
-        Dice* dice4 = [[Dice alloc] init];
-        Dice* dice5 = [[Dice alloc] init];
+        GameController *gameController = [[GameController alloc] init];
         BOOL again = YES;
         NSString* choice = [[NSString alloc] init];
         
-        
+        for (int i = 0;i < 5; i++) {
+            Dice* dice = [[Dice alloc] init];
+            [gameController addDice:dice];
+        }
+   
         while (again) {
             NSLog(@"What do you want to do?:");
-            NSLog(@"roll");
+            NSLog(@"- roll -");
             
             choice = [input input];
             
             if ([choice localizedCaseInsensitiveContainsString:@"roll"]) {
-                NSLog(@"%@",[dice random]);
-                NSLog(@"%@",[dice2 random]);
-                NSLog(@"%@",[dice3 random]);
-                NSLog(@"%@",[dice4 random]);
-                NSLog(@"%@",[dice5 random]);
+                for (int i = 0; i < 5; i++) {
+                    NSLog(@"%@",[gameController.dices[i] random]);
+                }
             }
             
         }
