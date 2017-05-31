@@ -41,6 +41,7 @@
             break;
         }
     }
+    self.value = diceSide;
     return diceSide;
 }
 

@@ -20,8 +20,7 @@ int main(int argc, const char * argv[]) {
         NSString* choice = [[NSString alloc] init];
         
         for (int i = 0;i < 5; i++) {
-            Dice* dice = [[Dice alloc] init];
-            [gameController addDice:dice];
+            [gameController.dices addObject:[[Dice alloc] init]];
         }
    
         while (again) {
@@ -31,10 +30,28 @@ int main(int argc, const char * argv[]) {
             choice = [input input];
             
             if ([choice localizedCaseInsensitiveContainsString:@"roll"]) {
-                for (int i = 0; i < 5; i++) {
-                    NSLog(@"%@",[gameController.dices[i] random]);
+                BOOL hold = YES;
+                NSLog(@"Which dice do you want to hold?");
+                while (hold) {
+                    for (Dice* d in gameController.dices) {
+                        NSLog(@"%@",[d random]);
+                    }
+                    choice = [input input];
+                    [gameController holdDie:[choice intValue]];
+                    
+                    NSLog(@"Do you want to hold another dice? (y/n)");
+                    choice = [input input];
+                    
+                    if ([choice localizedCaseInsensitiveContainsString:@"n"]) {
+                        hold = NO;
+                        for (Dice* di in gameController.heldDices) {
+                            NSLog(@"%@",di.value);
+                        }
+                    }
+                    
                 }
             }
+            
             
         }
     }

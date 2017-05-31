@@ -20,8 +20,10 @@
     return self;
 }
 
--(void)addDice:(Dice*) dice {
-    [self.dices addObject:dice];
+-(void)holdDie:(int)i {
+    int index = i - 1;
+    [self.heldDices addObject:self.dices[index]];
+    [self.dices removeObjectAtIndex:index];
 }
 
 @end

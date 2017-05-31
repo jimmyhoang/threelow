@@ -14,6 +14,6 @@
 @property (nonatomic, strong) NSMutableArray* dices;
 @property (nonatomic, strong) NSMutableArray* heldDices;
 
--(void)addDice:(Dice*) dice;
 
+-(void)holdDie:(int) i;
 @end
