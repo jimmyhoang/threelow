@@ -10,12 +10,16 @@
 
 @implementation Dice
 
--(NSString* )random {
-    int value = arc4random_uniform(6)+1;
+-(int)random {
+    int random = arc4random_uniform(6)+1;
+    self.value = random;
+    return random;
+}
+
+-(NSString *)symbol:(int)dice {
     NSString* diceSide = [[NSString alloc] init];
     
-    
-    switch (value) {
+    switch (dice) {
         case 1: {
             diceSide = [NSString stringWithFormat:@"⚀"];
             break;
@@ -41,8 +45,6 @@
             break;
         }
     }
-    self.value = diceSide;
     return diceSide;
 }
-
 @end

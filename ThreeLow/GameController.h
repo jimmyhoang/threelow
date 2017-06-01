@@ -16,4 +16,6 @@
 
 
 -(void)holdDie:(int) i;
+-(void)resetDie;
+-(void)score;
 @end
