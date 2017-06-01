@@ -18,4 +18,6 @@
 -(void)holdDie:(int) i;
 -(void)resetDie;
 -(void)score;
+-(void)printDice;
+-(void)printheldDice;
 @end

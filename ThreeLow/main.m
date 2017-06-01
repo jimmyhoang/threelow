@@ -20,13 +20,6 @@ int main(int argc, const char * argv[]) {
         NSString* choice = [[NSString alloc] init];
         
         
-        for (int i = 0;i < 5; i++) {
-            Dice* dice = [[Dice alloc] init];
-            [gameController.dices insertObject:dice atIndex:i];
-            [dice random];
-        }
-        
-        
         while (again) {
             NSLog(@"What do you want to do?:");
             NSLog(@"- roll -");
@@ -37,14 +30,8 @@ int main(int argc, const char * argv[]) {
             
             if ([choice localizedCaseInsensitiveContainsString:@"roll"]) {
                 BOOL hold = YES;
-                for (Dice* d in gameController.dices) {
-                    if (d.value == 0) {
-                        NSLog(@"[XX]");
-                    } else {
-                        NSLog(@"%@",[d symbol:d.value]);
-                    }
-                    
-                }
+                [gameController printDice];
+                
                 while (hold) {
                     NSLog(@"Which dice do you want to hold?");
                     choice = [input input];
@@ -53,35 +40,16 @@ int main(int argc, const char * argv[]) {
                     choice = [input input];
                     if ([choice localizedCaseInsensitiveContainsString:@"n"]) {
                         hold = NO;
-                        for (Dice* d in gameController.heldDices) {
-                            if (d.value == 0) {
-                                NSLog(@"[XX]");
-                            } else {
-                                NSLog(@"[%@]",[d symbol:d.value]);
-                            }
-                        }
+                        [gameController printheldDice];
+
                     } else {
-                        for (Dice* d in gameController.dices) {
-                            if (d.value == 0) {
-                                NSLog(@"[XX]");
-                            } else {
-                                NSLog(@"[%@]",[d symbol:d.value]);
-                                
-                            }
-                        }
-                      }
+                        [gameController printDice];
+                    }
                     
                 }
             } else if ([choice localizedCaseInsensitiveContainsString:@"unhold"]) {
                 do {
-                    for (Dice* d in gameController.heldDices) {
-                        if (d.value == 0) {
-                            NSLog(@"[XX]");
-                        } else {
-                            NSLog(@"[%@]",[d symbol:d.value]);
-                            
-                        }
-                    }
+                    [gameController printheldDice];
                     NSLog(@"Which dice do you want to unhold?");
                     choice = [input input];
                     [gameController holdDie:[choice intValue]];

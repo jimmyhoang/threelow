@@ -16,6 +16,12 @@
     if (self) {
         _dices = [[NSMutableArray alloc] init];
         _heldDices = [[NSMutableArray alloc] init];
+        
+        for (int i = 0;i < 5; i++) {
+            Dice* dice = [[Dice alloc] init];
+            [dice random];
+            [self.dices insertObject:dice atIndex:i];
+        }
 
         for (int i = 0;i < 5; i++) {
             [self.heldDices addObject:[[Dice alloc] init]];
@@ -55,6 +61,28 @@
     }
         NSLog(@"Score:%d",score);
 
+}
+
+-(void)printDice {
+    for (Dice* d in self.dices) {
+        if (d.value == 0) {
+            NSLog(@"[XX]");
+        } else {
+            NSLog(@"[%@]",[d symbol:d.value]);
+        }
+    }
+}
+
+-(void)printheldDice {
+    for (Dice* d in self.heldDices) {
+        if (d.value == 0) {
+            NSLog(@"[XX]");
+        } else {
+            NSLog(@"[%@]",[d symbol:d.value]);
+            
+        }
+    }
+    
 }
 @end
 
